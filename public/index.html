@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>贴一块 | 在线剪贴板</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">
+      <span class="brand-icon">贴</span>
+      <span>
+        <strong>贴一块</strong>
+        <em>短码传文本和文件</em>
+      </span>
+    </a>
+    <nav>
+      <a href="#put">贴一块</a>
+      <a href="#find">找一块</a>
+      <a href="#how">怎么用</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Online Clipboard</p>
+        <h1>把文字或文件临时贴到云端，用 4 位识别码取回。</h1>
+        <p>适合跨设备传文本、临时发文件、把手机和电脑之间的信息快速搬过去。无需注册，内容自动过期。</p>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <form id="put" class="panel">
+        <div class="panel-head">
+          <span class="step">01</span>
+          <div>
+            <h2>贴一块</h2>
+            <p>上传一段文本，也可以附带一个文件。</p>
+          </div>
+        </div>
+
+        <label>
+          文本内容
+          <textarea id="textInput" placeholder="把要分享的文字粘贴到这里"></textarea>
+        </label>
+
+        <label class="file-picker">
+          <input id="fileInput" type="file">
+          <span>选择文件</span>
+          <em id="fileName">未选择文件，最大 5MB</em>
+        </label>
+
+        <label>
+          保存时间
+          <select id="ttlInput">
+            <option value="1">1 小时</option>
+            <option value="12">12 小时</option>
+            <option value="24" selected>24 小时</option>
+            <option value="72">3 天</option>
+            <option value="168">7 天</option>
+          </select>
+        </label>
+
+        <button type="submit">生成识别码</button>
+
+        <div id="createdResult" class="result hidden">
+          <span>识别码</span>
+          <strong id="createdCode">------</strong>
+          <p id="createdMeta"></p>
+          <button id="copyCode" type="button">复制识别码</button>
+        </div>
+      </form>
+
+      <section id="find" class="panel">
+        <div class="panel-head">
+          <span class="step">02</span>
+          <div>
+            <h2>找一块</h2>
+            <p>输入对方给你的识别码，取回文本或文件。</p>
+          </div>
+        </div>
+
+        <form id="findForm" class="find-form">
+          <label>
+            识别码
+            <input id="codeInput" maxlength="4" autocomplete="off" placeholder="例如 A8K2">
+          </label>
+          <button type="submit">查找</button>
+        </form>
+
+        <div id="foundResult" class="found hidden">
+          <div class="found-head">
+            <span id="foundCode">------</span>
+            <em id="foundExpire"></em>
+          </div>
+          <pre id="foundText"></pre>
+          <a id="downloadLink" class="download hidden" href="#">下载文件</a>
+          <button id="copyText" type="button" class="secondary hidden">复制文本</button>
+        </div>
+      </section>
+    </section>
+
+    <section id="how" class="how">
+      <div class="panel how-panel">
+        <div class="panel-head">
+          <span class="step">?</span>
+          <div>
+            <h2>怎么用</h2>
+            <p>只需三步完成文本和文件的临时分享与取回。</p>
+          </div>
+        </div>
+
+        <div class="how-steps">
+          <div class="how-step">
+            <strong>1</strong>
+            <div>
+              <h3>用户 A 贴内容</h3>
+              <p>输入文本或选择文件，点击生成识别码。</p>
+            </div>
+          </div>
+
+          <div class="how-step">
+            <strong>2</strong>
+            <div>
+              <h3>把识别码告诉用户 B</h3>
+              <p>识别码只有 4 位，适合口头、聊天或短信传递。</p>
+            </div>
+          </div>
+
+          <div class="how-step">
+            <strong>3</strong>
+            <div>
+              <h3>用户 B 找回内容</h3>
+              <p>在找一块中输入识别码，即可查看文本或下载文件。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
